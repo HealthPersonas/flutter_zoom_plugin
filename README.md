@@ -30,7 +30,7 @@ Use the git tags for deployments as milestones as the master branch is considere
 ```yaml
   flutter_zoom_plugin:
       git:
-        url: git://github.com/decodedhealth/flutter_zoom_plugin.git
+        url: git://github.com/sagely/flutter_zoom_plugin.git
         ref: 0.0.8
 ```
 
@@ -39,7 +39,7 @@ Please use `master` for Apple app store build deployments.
 ```yaml
   flutter_zoom_plugin:
       git:
-        url: git://github.com/decodedhealth/flutter_zoom_plugin.git
+        url: git://github.com/sagely/flutter_zoom_plugin.git
         ref: master
 ```
 
