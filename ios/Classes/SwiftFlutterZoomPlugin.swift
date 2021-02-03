@@ -260,7 +260,10 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
             meetingSettings?.setMuteAudioWhenJoinMeeting(parseBoolean(data: arguments["noAudio"]!, defaultValue: false))
             meetingSettings?.meetingShareHidden = parseBoolean(data: arguments["disableShare"]!, defaultValue: false)
             meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableDrive"]!, defaultValue: false)
-       
+            meetingSettings?.setMuteVideoWhenJoinMeeting(parseBoolean(data: arguments["noVideo"]!, defaultValue: false))
+            meetingSettings?.meetingMoreHidden = true;
+            meetingSettings?.meetingPasswordHidden = true;
+            
             var params = [
                 kMeetingParam_Username: arguments["userId"]!!,
                 kMeetingParam_MeetingNumber: arguments["meetingId"]!!
@@ -270,7 +273,9 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
             if hasPassword {
                 params[kMeetingParam_MeetingPassword] = arguments["meetingPassword"]!!
             }
-            
+            //handle the null exception of the customMeetingTitle
+            meetingService?.customizeMeetingTitle(arguments["customMeetingTitle"]!)
+
             let response = meetingService?.joinMeeting(with: params)
             
             if let response = response {

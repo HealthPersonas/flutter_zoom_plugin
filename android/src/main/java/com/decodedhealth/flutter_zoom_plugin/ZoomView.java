@@ -24,6 +24,7 @@ import us.zoom.sdk.ZoomSDK;
 import us.zoom.sdk.ZoomSDKAuthenticationListener;
 import us.zoom.sdk.ZoomSDKInitParams;
 import us.zoom.sdk.ZoomSDKInitializeListener;
+import us.zoom.sdk.MeetingViewsOptions;
 
 public class ZoomView  implements PlatformView,
         MethodChannel.MethodCallHandler,
@@ -135,7 +136,17 @@ public class ZoomView  implements PlatformView,
         opts.no_dial_in_via_phone = parseBoolean(options, "disableDialIn", false);
         opts.no_disconnect_audio = parseBoolean(options, "noDisconnectAudio", false);
         opts.no_audio = parseBoolean(options, "noAudio", false);
+        opts.no_video = parseBoolean(options, "noVideo", false);
+        opts.custom_meeting_id = options.get("customMeetingTitle") != null ? options.get("customMeetingTitle") : "Heatlh Personas Meeting";
+        
+        
 
+        opts.meeting_views_options = MeetingViewsOptions.NO_BUTTON_MORE 
+                                    + MeetingViewsOptions.NO_TEXT_PASSWORD;
+       
+        
+
+        
         JoinMeetingParams params = new JoinMeetingParams();
 
         params.displayName = options.get("userId");
@@ -146,6 +157,8 @@ public class ZoomView  implements PlatformView,
 
         result.success(true);
     }
+
+    
 
     private void startMeeting(MethodCall methodCall, MethodChannel.Result result) {
 
@@ -168,6 +181,8 @@ public class ZoomView  implements PlatformView,
         opts.no_dial_in_via_phone = parseBoolean(options, "disableDialIn", false);
         opts.no_disconnect_audio = parseBoolean(options, "noDisconnectAudio", false);
         opts.no_audio = parseBoolean(options, "noAudio", false);
+        opts.no_video = parseBoolean(options, "noVideo", false);
+
 
         StartMeetingParamsWithoutLogin params = new StartMeetingParamsWithoutLogin();
 
@@ -175,8 +190,8 @@ public class ZoomView  implements PlatformView,
         params.displayName = options.get("displayName");
         params.meetingNo = options.get("meetingId");
 		params.userType = MeetingService.USER_TYPE_API_USER;
-		params.zoomToken = options.get("zoomToken");
-		params.zoomAccessToken = options.get("zoomAccessToken");
+		// params.zoomToken = options.get("zoomToken");
+		// params.zoomAccessToken = options.get("zoomAccessToken");
 		
         meetingService.startMeetingWithParams(context, params, opts);
 
