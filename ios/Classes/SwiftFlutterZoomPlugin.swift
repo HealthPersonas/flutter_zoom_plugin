@@ -40,7 +40,7 @@ public class AuthenticationDelegate: NSObject, MobileRTCAuthDelegate {
     
     public func onMobileRTCAuthReturn(_ returnValue: MobileRTCAuthError) {
 
-        if returnValue == MobileRTCAuthError_Success {
+        if returnValue == MobileRTCAuthError.success {
             self.result?([0, 0])
         } else {
             self.result?([1, 0])
@@ -305,10 +305,10 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
 
             let user: MobileRTCMeetingStartParam4WithoutLoginUser = MobileRTCMeetingStartParam4WithoutLoginUser.init()
             
-            user.userType = MobileRTCUserType_APIUser
+            user.userType = MobileRTCUserType.apiUser
             user.meetingNumber = arguments["meetingId"]!!
             user.userName = arguments["displayName"]!!
-            user.userToken = arguments["zoomToken"]!!
+//            user.userToken = arguments["zoomToken"]!!
             user.userID = arguments["userId"]!!
             user.zak = arguments["zoomAccessToken"]!!
 
@@ -402,21 +402,61 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
         
         var message: [String]
         
+        guard let state = state else {
+            return ["MEETING_STATUS_UNKNOWN", "Unknown error"]
+        }
+        
         switch state {
-        case MobileRTCMeetingState_Idle:
+        case MobileRTCMeetingState.idle:
             message = ["MEETING_STATUS_IDLE", "No meeting is running"]
             break
-        case MobileRTCMeetingState_Connecting:
+        case MobileRTCMeetingState.connecting:
             message = ["MEETING_STATUS_CONNECTING", "Connect to the meeting server"]
             break
-        case MobileRTCMeetingState_InMeeting:
+        case MobileRTCMeetingState.waitingForHost:
+            message = ["MEETING_STATUS_WAITING_FOR_HOST", "Waiting for host"]
+            break
+        case MobileRTCMeetingState.inMeeting:
             message = ["MEETING_STATUS_INMEETING", "Meeting is ready and in process"]
             break
-        case MobileRTCMeetingState_WebinarPromote:
+        case MobileRTCMeetingState.disconnecting:
+            message = ["MEETING_STATUS_DISCONNECTING", "Disconnecting meeting"]
+            break
+        case MobileRTCMeetingState.reconnecting:
+            message = ["MEETING_STATUS_RECONNECTING", "Reconnecting meeting"]
+            break
+        case MobileRTCMeetingState.failed:
+            message = ["MEETING_STATUS_FAILED", "Meeting failed"]
+            break
+        case MobileRTCMeetingState.ended:
+            message = ["MEETING_STATUS_ENDED", "Meeting ends"]
+            break
+        case MobileRTCMeetingState.unknow:
+            message = ["MEETING_STATUS_UNKNOWN", "Unknown status"]
+            break
+        case MobileRTCMeetingState.locked:
+            message = ["MEETING_STATUS_LOCKED", "Meeting is looked"]
+            break
+        case MobileRTCMeetingState.unlocked:
+            message = ["MEETING_STATUS_UNLOCKED", "Meeting is unlocked"]
+            break
+        case MobileRTCMeetingState.inWaitingRoom:
+            message = ["MEETING_STATUS_IN_WAITING_ROOM", "In waiting room"]
+            break
+        case MobileRTCMeetingState.webinarPromote:
             message = ["MEETING_STATUS_WEBINAR_PROMOTE", "Upgrade the attendees to panelist in webinar"]
             break
-        case MobileRTCMeetingState_WebinarDePromote:
+        case MobileRTCMeetingState.webinarDePromote:
             message = ["MEETING_STATUS_WEBINAR_DEPROMOTE", "Demote the attendees from the panelist"]
+            break
+        case MobileRTCMeetingState.joinBO:
+            message = ["MEETING_STATUS_JOIN_BO", "Join the break out room"]
+            break
+        case MobileRTCMeetingState.leaveBO:
+            message = ["MEETING_STATUS_LEAVE_BO", "Leave the break out room"]
+            break
+        case MobileRTCMeetingState.waitingExternalSessionKey:
+            message = ["MEETING_STATUS_WAITING_EXTERNAL_SESSION_KEY", "Waiting for the additional secret key"]
             break
         default:
             message = ["MEETING_STATUS_UNKNOWN", "Unknown error"]
