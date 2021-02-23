@@ -2,17 +2,19 @@
 //  MobileRTCMeetingService+Chat.h
 //  MobileRTC
 //
-//  Created by Chao Bai on 2018/6/6.
+//  Created by Zoom Video Communications on 2018/6/6.
 //  Copyright © 2019 Zoom Video Communications, Inc. All rights reserved.
 //
 
 #import <MobileRTC/MobileRTC.h>
 
 typedef enum {
-    ///All the members in the group. 
+    ///Chat to all participants in the meeting. 
     MobileRTCChatGroup_All                   = 0,
-    ///Panelists.
-    MobileRTCChatGroup_Panelists              = 1,
+    ///Chat to panelists in the webinar.
+    MobileRTCChatGroup_Panelists             = 1,
+    ///Chat to waiting room user
+    MobileRTCChatGroup_SilentModeUsers       = 2,
 }MobileRTCChatGroup;
 
 @interface MobileRTCMeetingService (Chat)

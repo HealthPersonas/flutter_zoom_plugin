@@ -2,13 +2,14 @@
 //  MobileRTCMeetingService+InMeeting.h
 //  MobileRTC
 //
-//  Created by Robust Hu on 2017/2/27.
+//  Created by Zoom Video Communications on 2017/2/27.
 //  Copyright © 2019年 Zoom Video Communications, Inc. All rights reserved.
 //
 
 #import <MobileRTC/MobileRTC.h>
 #import <MobileRTC/MobileRTCMeetingUserInfo.h>
 #import <MobileRTC/MobileRTCMeetingChat.h>
+#import "MobileRTCE2EMeetingKey.h"
 
 /*!
  @brief Set to provide interfaces for meeting events
@@ -92,7 +93,7 @@
  @return YES means that the method is called successfully, otherwise not.
  @warning The method is optional.
  */
-- (BOOL)handleE2EMeetingKey:(nonnull NSArray*)keyArray withLeaveMeeting:(BOOL)leave;
+- (BOOL)handleE2EMeetingKey:(nonnull NSArray <MobileRTCE2EMeetingKey *> *)keyArray withLeaveMeeting:(BOOL)leave;
 
 /*!
  @brief Query if the meeting is external or not.
@@ -114,6 +115,12 @@
  @warning The method is optional.
  */
 - (BOOL)isFailoverMeeting;
+
+/**
+ * @brief Get the type of current meeting.
+ * @return If the function succeeds, it will return the type of meeting, otherwise failed.
+ */
+- (MobileRTCMeetingType)getMeetingType;
 
 /*!
  @brief Query if the meeting is Webinar.
@@ -227,6 +234,27 @@
  */
 - (void)showMeetingControlBar;
 
+/*!
+ @brief Switch to active scene.The sequence of video frames is { drive scene(only iPhone), active scene, gallery scene(if has)}
+ @warning The zoom meeting UI is only valid, the customized UI is invalid.
+ @warning Both the iPad and the iPhone can use this method
+ */
+- (void)switchToActiveSpeaker;
+
+/*!
+ @brief Switch to gallery scene.The sequence of video frames is { drive scene(only iPhone), active scene, gallery scene(if has)}
+ @warning The zoom meeting UI is only valid, the customized UI is invalid.
+ @warning Both the iPad and the iPhone can use this method
+ */
+- (void)switchToVideoWall;
+
+/*!
+ @brief Switch to drive scene.The sequence of video frames is { drive scene(only iPhone), active scene, gallery scene(if has)}
+ @warning The zoom meeting UI is only valid, the customized UI is invalid.
+ @warning Only iPhone can use this method
+ */
+- (void)switchToDriveScene;
+
 #pragma mark - Q&A Related
 /*!
  @brief Query if Q&A is enabled.
@@ -258,5 +286,33 @@
  @warning The method only for Zoom UI
  */
 - (BOOL)backZoomUIMeetingFromMinimizeMeeting;
+
+/*!
+@brief Query if the meeting is allow participants to rename themselves.
+@warning Only meeting host/co-host can call the function.
+@warning Only in-meeting can call the function.
+*/
+- (BOOL)isParticipantsRenameAllowed;
+
+/*!
+@brief Set the meeting is allow participants to rename themselves.
+@warning Only meeting host/co-host can call the function.
+@warning Only in-meeting can call the function.
+*/
+- (void)allowParticipantsToRename:(BOOL)allow;
+
+/*!
+@brief Query if the meeting is allow participants to unmute themselves.
+@warning Only meeting host/co-host can call the function.
+@warning Only in-meeting can call the function.
+*/
+- (BOOL)isParticipantsUnmuteSelfAllowed;
+
+/*!
+@brief Query if the meeting is allow participants to unmute themselves.
+@warning Only meeting host/co-host can call the function.
+@warning Only in-meeting can call the function.
+*/
+- (void)allowParticipantsToUnmuteSelf:(BOOL)allow;
 
 @end

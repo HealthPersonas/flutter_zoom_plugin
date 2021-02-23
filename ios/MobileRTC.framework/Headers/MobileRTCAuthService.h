@@ -2,7 +2,7 @@
 //  MobileRTCAuthService.h
 //  MobileRTC
 //
-//  Created by Robust Hu on 8/8/14.
+//  Created by Zoom Video Communications on 8/8/14.
 //  Copyright (c) 2019 Zoom Video Communications, Inc. All rights reserved.
 //
 
@@ -81,6 +81,13 @@
 - (BOOL)loginWithSSOToken:(nonnull NSString*)token rememberMe:(BOOL)rememberMe;
 
 /*!
+ @brief Query if it is enabled to login with email.
+ @return YES means enable, otherwise not.
+ @warning You need call the function after auth successfull.
+ */
+- (BOOL)isEmailLoginEnabled;
+
+/*!
  @brief Specify to logout MobileRTC.
  @return YES indicates to call the method successfully. Otherwise not.
  @warning The method is optional, ignore it if you do not login MobileRTC.
@@ -116,8 +123,15 @@
 /*!
  @brief Specify to get the response of MobileRTC logs in.
  @param returnValue Notify the user when the login state has changed.
+ @warning will deprecated,please replace with "- (void)onMobileRTCLoginResult:(MobileRTCLoginFailReason)resultValue".
  */
-- (void)onMobileRTCLoginReturn:(NSInteger)returnValue;
+- (void)onMobileRTCLoginReturn:(NSInteger)returnValue DEPRECATED_ATTRIBUTE;
+
+/*!
+ @brief Specify to get the response of MobileRTC logs in.
+ @param returnValue Notify the user when the login state has changed.
+ */
+- (void)onMobileRTCLoginResult:(MobileRTCLoginFailReason)resultValue;
 
 /*!
  @brief Specify to get the response of MobileRTC logs out.
@@ -190,7 +204,7 @@
  @brief Get alternative host list from user profile information.
  @return An array with MobileRTCAlternativeHost information.
  */
-- (nullable NSArray*)getCanScheduleForUsersList;
+- (nullable NSArray <MobileRTCAlternativeHost *> *)getCanScheduleForUsersList;
 
 /*!
  @brief Check if local recording is supported while scheduling a meeting.
@@ -220,7 +234,7 @@
  @brief Get specified domain from user profile.
  @return The data in domain array is NSString type.
  */
-- (nullable NSArray *)getDefaultCanJoinUserSpecifiedDomains;
+- (nullable NSArray <NSString *> *)getDefaultCanJoinUserSpecifiedDomains;
 
 @end
 
