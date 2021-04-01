@@ -17,32 +17,35 @@ Feedback and Pull Requests are always welcome.
 
 ## Zoom SDK Versions
 
-Android: https://github.com/zoom/zoom-sdk-android/releases/tag/v4.6.21666.0429
- 
-iOS: https://github.com/zoom/zoom-sdk-ios/releases/tag/v4.6.21666.0428
+This has been tested using the following versions of the Zoom SDK:
+
+Android: `5.4.3.613`
+
+iOS: `5.4.54802.0124`
 
 ## Installation
 
-First, add `flutter_zoom_plugin` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
+Because Zoom no longer provides public access to its SDK, this project is set up to require you
+to download the SDK from your Marketplace account and install it manually.
 
-Use the git tags for deployments as milestones as the master branch is considered active development.
+1. Clone this project at the same level as your Flutter project.
 
-```yaml
+1. Download the iOS and Android SDKs from Zoom Marketplace and copy the zip files into the sdk folder of this project.
+
+1. Run the following script in the root folder of this project to extract the required SDK files.
+
+    ```shell script
+    flutter pub run flutter_zoom_plugin:unzip_zoom_sdk
+    ```
+
+1. Add `flutter_zoom_plugin` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
+
+    Use the path specification to point at this project's folder:
+
+    ```yaml
   flutter_zoom_plugin:
-      git:
-        url: git://github.com/sagely/flutter_zoom_plugin.git
-        ref: 0.0.8
-```
-
-Please use `master` for Apple app store build deployments. 
-
-```yaml
-  flutter_zoom_plugin:
-      git:
-        url: git://github.com/sagely/flutter_zoom_plugin.git
-        ref: master
-```
-
+      path: ../flutter_zoom_plugin
+    ```
 
 ### iOS
 
