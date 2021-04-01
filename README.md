@@ -43,7 +43,7 @@ to download the SDK from your Marketplace account and install it manually.
     Use the path specification to point at this project's folder:
 
     ```yaml
-  flutter_zoom_plugin:
+    flutter_zoom_plugin:
       path: ../flutter_zoom_plugin
     ```
 
