@@ -87,4 +87,9 @@
 
 .git/
 
+# Zoom SDK
+sdk/*.zip
+ios/MobileRTC.framework
+ios/MobileRTCResources.bundle
+ios/MobileRTCScreenShare.framework
 android/libs/mobilertc/mobilertc.aar

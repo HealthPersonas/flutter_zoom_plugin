@@ -1,0 +1,1 @@
+The Zoom SDK zip files should be copied into this folder.
