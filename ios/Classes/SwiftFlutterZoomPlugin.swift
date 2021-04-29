@@ -194,7 +194,6 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
     public func view() -> UIView {
         
         let label = UILabel(frame: frame)
-        label.text = "Zoom"
         return label
     }
     
