@@ -7,16 +7,15 @@ import 'package:path/path.dart' as p;
 ///
 /// The required are found in the following location:
 ///
-///  - Sample&Libs-All (Development on Simulator)
-///  - Sample&Libs-DeviceOnly (Production)
+///  - lib
 ///
 /// The folders that need to be copied to the ios folder are located in the libs subfolder:
 ///
-///  - MobileRTC.framework
+///  - MobileRTC.xcframework
 ///  - MobileRTCResources.bundle
-///  - MobileRTCScreenShare.framework
+///  - MobileRTCScreenShare.xcframework
 ///
-void processIOS(List<FileSystemEntity> files, bool devMode) {
+void processIOS(List<FileSystemEntity> files) {
   print('Processing iOS SDK');
   Directory projectRoot = Directory.fromUri(Platform.script).parent.parent;
 
@@ -33,8 +32,10 @@ void processIOS(List<FileSystemEntity> files, bool devMode) {
   print(' - Deleting existing files');
   List<String> folders = [
     'MobileRTC.framework',
+    'MobileRTC.xcframework',
     'MobileRTCResources.bundle',
     'MobileRTCScreenShare.framework',
+    'MobileRTCScreenShare.xcframework',
   ];
   Directory targetFolder = projectRoot.listSync().firstWhere((e) => e is Directory && p.basename(e.path) == 'ios');
   for (FileSystemEntity entity in targetFolder.listSync()) {
@@ -45,7 +46,8 @@ void processIOS(List<FileSystemEntity> files, bool devMode) {
 
   print(' - Extracting SDK files');
   for (ArchiveFile file in archive) {
-    String prefix = (devMode ? 'Sample&Libs-All' : 'Sample&Libs-DeviceOnly') + '/lib';
+    // String prefix = (devMode ? 'Sample&Libs-All' : 'Sample&Libs-DeviceOnly') + '/lib';
+    String prefix = 'lib';
     if (file.name.contains(prefix) && file.isFile) {
       File targetFile = File(targetFolder.path + file.name.substring(file.name.indexOf(prefix) + prefix.length));
       targetFile.createSync(recursive: true);
@@ -98,11 +100,10 @@ void processAndroid(List<FileSystemEntity> files) {
 }
 
 void main(List<String> args) {
-  bool devMode = args.length > 0 && args[0] == 'dev';
   Directory projectRoot = Directory.fromUri(Platform.script).parent.parent;
   Directory sdkFolder = projectRoot.listSync().firstWhere((e) => e is Directory && p.basename(e.path) == 'sdk');
   List<FileSystemEntity> files = sdkFolder.listSync();
 
-  processIOS(files, devMode);
+  processIOS(files);
   processAndroid(files);
 }

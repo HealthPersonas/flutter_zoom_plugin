@@ -90,6 +90,8 @@
 # Zoom SDK
 sdk/*.zip
 ios/MobileRTC.framework
+ios/MobileRTC.xcframework
 ios/MobileRTCResources.bundle
 ios/MobileRTCScreenShare.framework
+ios/MobileRTCScreenShare.xcframework
 android/libs

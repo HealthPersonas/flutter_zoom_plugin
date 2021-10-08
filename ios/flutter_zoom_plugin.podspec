@@ -19,8 +19,8 @@ A new Flutter plugin.
   s.ios.deployment_target = '8.0'
 
   s.xcconfig = { 'OTHER_LDFLAGS' => '-framework MobileRTC' }
-  s.preserve_paths = 'MobileRTC.framework', 'MobileRTCResources.bundle'
-  s.vendored_frameworks = 'MobileRTC.framework'
+  s.preserve_paths = 'MobileRTC.xcframework', 'MobileRTCResources.bundle'
+  s.vendored_frameworks = 'MobileRTC.xcframework'
   s.resource = 'MobileRTCResources.bundle'
 
 end

@@ -19,9 +19,9 @@ Feedback and Pull Requests are always welcome.
 
 This has been tested using the following versions of the Zoom SDK:
 
-Android: `5.4.3.613`
+Android: `5.7.6.1915`
 
-iOS: `5.4.54802.0124`
+iOS: `5.7.6.1076`
 
 ## Installation
 
@@ -61,21 +61,6 @@ Or in text format add the key:
 <string>Need to use the camera for call</string>
 <key>NSMicrophoneUsageDescription</key>
 <string>Need to use the microphone for call</string>
-```
-
-**NOTE for testing on the iOS simulator**
-
-If you want to use the iOS Simulator to test your app, you will need to ensure you have the iOS Dev Zoom SDK as a dependency. 
-
-To use the Dev Zoom SDK, run the following
-```shell script
-flutter pub run flutter_zoom_plugin:unzip_zoom_sdk dev
-```
-    
-To switch back to the normal Zoom SDK, simply run
-
-```shell script
-flutter pub run flutter_zoom_plugin:unzip_zoom_sdk
 ```
 
 ### Android
