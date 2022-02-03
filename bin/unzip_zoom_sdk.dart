@@ -3,6 +3,20 @@ import 'package:archive/archive.dart';
 import 'package:path/path.dart' as p;
 
 ///
+/// Get the root directory of the project.
+/// For older versions of dart, just use the script property and go up
+/// For newer versions, find the parent of the .dart_tool folder
+///
+Directory getProjectRoot() {
+  String path = Platform.script.path;
+  if (path.contains('.dart_tool')) {
+    return Directory(path.substring(0, path.indexOf('.dart_tool')));
+  } else {
+    return Directory(path).parent.parent;
+  }
+}
+
+///
 /// Extract the required files from the iOS SDK.
 ///
 /// The required are found in the following location:
@@ -17,7 +31,7 @@ import 'package:path/path.dart' as p;
 ///
 void processIOS(List<FileSystemEntity> files) {
   print('Processing iOS SDK');
-  Directory projectRoot = Directory.fromUri(Platform.script).parent.parent;
+  Directory projectRoot = getProjectRoot();
 
   // unzip the SDK
   File sdk = files.firstWhere((f) => f.uri.pathSegments.last.startsWith('zoom-sdk-ios'), orElse: () => null);
@@ -68,7 +82,7 @@ void processIOS(List<FileSystemEntity> files) {
 ///
 void processAndroid(List<FileSystemEntity> files) {
   print('Processing Android SDK');
-  Directory projectRoot = Directory.fromUri(Platform.script).parent.parent;
+  Directory projectRoot = getProjectRoot();
 
   // unzip the SDK
   File sdk = files.firstWhere((f) => f.uri.pathSegments.last.startsWith('zoom-sdk-android'), orElse: () => null);
@@ -100,7 +114,7 @@ void processAndroid(List<FileSystemEntity> files) {
 }
 
 void main(List<String> args) {
-  Directory projectRoot = Directory.fromUri(Platform.script).parent.parent;
+  Directory projectRoot = getProjectRoot();
   Directory sdkFolder = projectRoot.listSync().firstWhere((e) => e is Directory && p.basename(e.path) == 'sdk');
   List<FileSystemEntity> files = sdkFolder.listSync();
 
