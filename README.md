@@ -19,9 +19,9 @@ Feedback and Pull Requests are always welcome.
 
 This has been tested using the following versions of the Zoom SDK:
 
-Android: `5.7.6.1918`
+Android: `5.9.3.4273`
 
-iOS: `5.7.6.1080`
+iOS: `5.9.3.2512`
 
 ## Installation
 
