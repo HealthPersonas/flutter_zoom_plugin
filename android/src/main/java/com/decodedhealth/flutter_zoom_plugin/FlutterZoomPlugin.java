@@ -1,12 +1,18 @@
 package com.decodedhealth.flutter_zoom_plugin;
 
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import androidx.annotation.NonNull;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 
 /** FlutterZoomPlugin */
-public class FlutterZoomPlugin {
+public class FlutterZoomPlugin implements FlutterPlugin {
 
   /** Plugin registration. */
-  public static void registerWith(Registrar registrar) {
-    registrar.platformViewRegistry().registerViewFactory("flutter_zoom_plugin", new ZoomViewFactory(registrar.messenger()));
+  @Override
+  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    binding.getPlatformViewRegistry().registerViewFactory("flutter_zoom_plugin", new ZoomViewFactory(binding.getBinaryMessenger()));
+  }
+
+  @Override
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
   }
 }
