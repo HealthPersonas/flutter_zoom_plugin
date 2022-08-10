@@ -22,6 +22,11 @@ A new Flutter plugin.
   s.preserve_paths = 'MobileRTC.xcframework', 'MobileRTCResources.bundle'
   s.vendored_frameworks = 'MobileRTC.xcframework'
   s.resource = 'MobileRTCResources.bundle'
+  s.pod_target_xcconfig = {
+    'DEFINES_MODULE' => 'YES',
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386',
+    'OTHER_LDFLAGS' => '-framework MobileRTC'
+  }
 
 end
 
