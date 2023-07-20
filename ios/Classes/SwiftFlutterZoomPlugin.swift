@@ -270,6 +270,7 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
             meetingJoinParams.meetingNumber = arguments["meetingId"] ?? ""
             meetingJoinParams.password = arguments["meetingPassword"] ?? ""
             meetingJoinParams.userName = arguments["userId"] ?? "Guest"
+            meetingJoinParams.webinarToken = arguments["webinarToken"] ?? ""
             
             //handle the null exception of the customMeetingTitle
             meetingService?.customizeMeetingTitle(arguments["customMeetingTitle"]!)

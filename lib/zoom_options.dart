@@ -12,6 +12,7 @@ class ZoomMeetingOptions {
   String displayName;
   String meetingId;
   String meetingPassword;
+  String webinarToken;
   String zoomToken;
   String zoomAccessToken;
   String disableDialIn;
@@ -30,6 +31,7 @@ class ZoomMeetingOptions {
       this.displayName,
       this.meetingId,
       this.meetingPassword,
+      this.webinarToken,
       this.zoomToken,
       this.zoomAccessToken,
       this.disableDialIn = 'true',
