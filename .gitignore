@@ -94,4 +94,5 @@ ios/MobileRTC.xcframework
 ios/MobileRTCResources.bundle
 ios/MobileRTCScreenShare.framework
 ios/MobileRTCScreenShare.xcframework
+ios/zoomcml.xcframework
 android/libs

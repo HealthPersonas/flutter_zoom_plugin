@@ -83,9 +83,7 @@ public class ZoomView  implements PlatformView,
         }
 
         ZoomSDKInitParams initParams = new ZoomSDKInitParams();
-        initParams.jwtToken = options.get("sdkToken");
-        initParams.appKey = options.get("appKey");
-        initParams.appSecret = options.get("appSecret");
+        initParams.jwtToken = options.get("jwtToken");
         initParams.domain = options.get("domain");
         zoomSDK.initialize(
                 context,
@@ -187,7 +185,7 @@ public class ZoomView  implements PlatformView,
 
         StartMeetingParamsWithoutLogin params = new StartMeetingParamsWithoutLogin();
 
-		params.userId = options.get("userId");
+		// params.userId = options.get("userId");
         params.displayName = options.get("displayName");
         params.meetingNo = options.get("meetingId");
 		params.userType = MeetingService.USER_TYPE_API_USER;
@@ -245,6 +243,11 @@ public class ZoomView  implements PlatformView,
 
     @Override
     public void onZoomIdentityExpired() {
+
+    }
+
+    @Override
+    public void onNotificationServiceStatus(SDKNotificationServiceStatus status) {
 
     }
 }

@@ -19,9 +19,9 @@ Feedback and Pull Requests are always welcome.
 
 This has been tested using the following versions of the Zoom SDK:
 
-Android: `5.11.3.7251`
+Android: `5.15.5.15204`
 
-iOS: `5.11.3.4099`
+iOS: `5.15.5.9353`
 
 ## Installation
 
@@ -119,8 +119,7 @@ class MeetingWidget extends StatelessWidget {
     // Setting up the Zoom credentials
     this.zoomOptions = new ZoomOptions(
       domain: "zoom.us",
-      appKey: "appKey", // Replace with with key got from the Zoom Marketplace
-      appSecret: "appSecret", // Replace with with secret got from the Zoom Marketplace
+      jwtToken: "jwtToken", // Replace with with generated JWT token (see https://developers.zoom.us/docs/meeting-sdk/auth/)
     );
 
     // Setting Zoom meeting options (default to false if not set)
@@ -243,8 +242,7 @@ class StartMeetingWidget extends StatelessWidget {
   StartMeetingWidget({Key key, meetingId}) : super(key: key) {
     this.zoomOptions = new ZoomOptions(
       domain: "zoom.us",
-      appKey: "appKey", // Replace with with key got from the Zoom Marketplace
-      appSecret: "appSecret", // Replace with with key got from the Zoom Marketplace
+      jwtToken: "jwtToken", // Replace with with generated JWT token (see https://developers.zoom.us/docs/meeting-sdk/auth/)
     );
     this.meetingOptions = new ZoomMeetingOptions(
         userId: '<zoom_user_id>', // Replace with the user email or Zoom user ID

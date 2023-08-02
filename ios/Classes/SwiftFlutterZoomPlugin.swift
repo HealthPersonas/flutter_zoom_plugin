@@ -227,8 +227,7 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
         
         let auth = MobileRTC.shared().getAuthService()
         auth?.delegate = self.authenticationDelegate.onAuth(result)
-        auth?.clientKey = arguments["appKey"]!
-        auth?.clientSecret = arguments["appSecret"]!
+        auth?.jwtToken = arguments["jwtToken"]!
         auth?.sdkAuth()
     }
     
@@ -308,7 +307,7 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
             user.meetingNumber = arguments["meetingId"]!!
             user.userName = arguments["displayName"]!!
 //            user.userToken = arguments["zoomToken"]!!
-            user.userID = arguments["userId"]!!
+//            user.userID = arguments["userId"]!!
             user.zak = arguments["zoomAccessToken"]!!
 
             let param: MobileRTCMeetingStartParam = user
@@ -460,9 +459,9 @@ public class ZoomView: NSObject, FlutterPlatformView, MobileRTCMeetingServiceDel
         case MobileRTCMeetingState.leaveBO:
             message = ["MEETING_STATUS_LEAVE_BO", "Leave the break out room"]
             break
-        case MobileRTCMeetingState.waitingExternalSessionKey:
-            message = ["MEETING_STATUS_WAITING_EXTERNAL_SESSION_KEY", "Waiting for the additional secret key"]
-            break
+//        case MobileRTCMeetingState.waitingExternalSessionKey:
+//            message = ["MEETING_STATUS_WAITING_EXTERNAL_SESSION_KEY", "Waiting for the additional secret key"]
+//            break
         default:
             message = ["MEETING_STATUS_UNKNOWN", "Unknown error"]
         }
